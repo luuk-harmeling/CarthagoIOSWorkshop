@@ -10,6 +10,8 @@ import Foundation
 
 class Concentration {
     
+    var numberOfPairs: Int = 0
+    var matchedPairsCount: Int = 0
     var cards = Array<Card>()
     var indexOfOneAndOnlyOneFaceUpCard : Int?
     
@@ -19,6 +21,7 @@ class Concentration {
                 if(cards[matchIndex].identifier == cards[index].identifier){
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
+                    matchedPairsCount += 1
                 }
                 cards[index].isFaceUp = true
                 indexOfOneAndOnlyOneFaceUpCard = nil
@@ -32,7 +35,12 @@ class Concentration {
         }
     }
     
+    func allCardsAreMatched() -> Bool {
+        return numberOfPairs == matchedPairsCount
+    }
+    
     init(numberOfPairsOfCards: Int) {
+        numberOfPairs = numberOfPairsOfCards
         for _ in 0..<numberOfPairsOfCards {
             let card = Card()
             cards += [card, card]
